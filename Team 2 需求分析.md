@@ -28,7 +28,7 @@
 
 ### 3. 需求分析
 
-博物馆新闻采集子系统，主要爬取目前极大主流新闻网站上的博物馆新闻信息，包括网易新闻、新浪新闻、今日头条、凤凰网等，然后对爬取到的新闻内容进行情感分析，判断其褒贬性，将处理后的数据存入数据库中。最后设计API接口供其他子系统调用。
+博物馆新闻采集子系统，主要爬取目前几大主流新闻网站上的博物馆新闻信息，包括百度新闻、网易新闻、新浪新闻、澎湃新闻、凤凰网、搜狐新闻等，然后对爬取到的新闻内容进行情感分析，判断其褒贬性，将处理后的数据存入数据库中。
 
 #### 功能需求：
 
@@ -42,7 +42,7 @@
   - 加工要求
     - 对数据进行加工分析，去除不必要的信息，并且对新闻内容进行情感分析并且得出其褒贬性
   - 实现方法
-    - python的情感分析库（可选项包括vader、jieba、NLTK）
+    - python的情感分析库（可选项包括vader、jieba、NLTK、bixin、snownlp、cnsenti）
 - 数据导入功能
   - 导入要求
     - 将加工筛选好的数据存入数据库，方便其他小组使用相关的信息。
@@ -50,13 +50,9 @@
     - Python-pymysql
     - MySQL
     - Scrapy框架
+    - bixin
+    - jieba
     - 部署到服务器
-- API设计
-  - 要求
-    - 设计Restful API供其他小组调用，进行数据的查询等操作
-  - 实现方法
-    - Python flask框架
-    - restful API设计规范
 
 #### 性能需求
 
@@ -74,24 +70,54 @@
 ### 4. 工程结构
 
 ```
+│  .gitignore
+│  README.md
 │  scrapy.cfg
 │
-└─spiderPro
+├─Document
+└─NewsPro
+    │  begin.py
+    │  chromedriver.exe
+    │  emo_an.py
+    │  getsubstr.py
+    │  get_muselist.py
+    │  get_News_muse.py
+    │  initial.json
     │  items.py
     │  middlewares.py
+    │  muselist.xlsx
     │  pipelines.py
+    │  processed_html.py
+    │  requirements.txt
     │  settings.py
+    │  time_process.py
     │  __init__.py
     │
     ├─spiders
-    │  │  getNews.py
+    │  │  Baidu.py
+    │  │  BaijiaHao.py
+    │  │  latest_url.json
+    │  │  NetEase.py
+    │  │  Sina.py
     │  │  __init__.py
     │  │
     │  └─__pycache__
+    │          Baidu.cpython-37.pyc
+    │          BaijiaHao.cpython-37.pyc
+    │          NetEase.cpython-37.pyc
+    │          Sina.cpython-37.pyc
     │          __init__.cpython-37.pyc
     │
     └─__pycache__
+            emo_an.cpython-37.pyc
+            getsubstr.cpython-37.pyc
+            get_muselist.cpython-37.pyc
+            items.cpython-37.pyc
+            middlewares.cpython-37.pyc
+            pipelines.cpython-37.pyc
+            processed_html.cpython-37.pyc
             settings.cpython-37.pyc
+            time_process.cpython-37.pyc
             __init__.cpython-37.pyc
 ```
 
